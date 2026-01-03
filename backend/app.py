@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 app = Flask(__name__)
-CORS(app)  # allow frontend requests
+CORS(app)
 
 def get_conn():
     return psycopg2.connect(
@@ -16,8 +16,6 @@ def get_conn():
         user=os.getenv("DB_USER"),
         password=os.getenv("DB_PASS")
     )
-
-# --- SETTINGS ENDPOINTS ---
 
 @app.route("/settings", methods=["GET"])
 def get_settings():
@@ -51,7 +49,6 @@ def update_settings():
     conn.close()
     return jsonify({"status": "updated"})
 
-# --- STATS ENDPOINTS ---
 
 @app.route("/pomodoro/end", methods=["POST"])
 def end_pomodoro():
