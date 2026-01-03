@@ -14,9 +14,28 @@ spec:
     spec:
       containers:
         - name: backend
-          image: didi0dumm/pomodoro-backend:v1
+          image: didi0dum/pomodoro-backend:v1
           ports:
             - containerPort: 5001
           env:
             - name: PORT
               value: "5001"
+            - name: DATABASE_HOST
+              value: pomodoro-postgres
+            - name: DATABASE_PORT
+              value: "5432"
+            - name: DATABASE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_USER
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_PASSWORD
+            - name: DATABASE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-secret
+                  key: POSTGRES_DB
