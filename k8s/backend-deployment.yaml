@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pomodoro-backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: pomodoro-backend
+  template:
+    metadata:
+      labels:
+        app: pomodoro-backend
+    spec:
+      containers:
+        - name: backend
+          image: didi0dumm/pomodoro-backend:v1
+          ports:
+            - containerPort: 5001
+          env:
+            - name: PORT
+              value: "5001"
