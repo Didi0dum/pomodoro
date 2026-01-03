@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pomodoro-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pomodoro-frontend
+  template:
+    metadata:
+      labels:
+        app: pomodoro-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: didi0dum/pomodoro-frontend:v1
+          ports:
+            - containerPort: 8080
