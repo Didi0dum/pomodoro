@@ -3,9 +3,10 @@ kind: Service
 metadata:
   name: pomodoro-frontend
 spec:
+  type: NodePort
   selector:
     app: pomodoro-frontend
   ports:
-    - port: 8080        # Service port
-      targetPort: 80    # Container port (nginx)
-  type: ClusterIP
+    - port: 8080        # service port (inside cluster)
+      targetPort: 80    # container port (nginx)
+      nodePort: 30080  # external port (optional but recommended)
